@@ -1,0 +1,61 @@
+{
+  "name": "vitaclear-page-loader",
+  "version": "0.0.1",
+  "description": "Loader of webpages",
+  "main": "index.js",
+  "bin": {
+    "page-loader": "dist/bin/page-loader.js"
+  },
+  "engines": {
+    "node": ">=13"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "babel-node": "babel-node",
+    "build": "NODE_ENV=production babel src --out-dir dist --source-maps inline",
+    "prepublishOnly": "npm run build",
+    "eslint": "eslint",
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vitaclear/backend-project-lvl3.git"
+  },
+  "author": "Vita Chistyakova",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vitaclear/backend-project-lvl3/issues"
+  },
+  "homepage": "https://github.com/vitaclear/backend-project-lvl3#readme",
+  "devDependencies": {
+    "@babel/cli": "^7.8.4",
+    "@babel/core": "^7.9.0",
+    "@babel/node": "^7.8.7",
+    "@babel/plugin-proposal-pipeline-operator": "^7.8.3",
+    "@babel/preset-env": "^7.9.5",
+    "babel-eslint": "*",
+    "babel-jest": "*",
+    "eslint": "*",
+    "eslint-config-airbnb-base": "*",
+    "eslint-plugin-babel": "^5.3.0",
+    "eslint-plugin-import": "*",
+    "eslint-plugin-jest": "*",
+    "jest": "*",
+    "jest-cli": "^25.4.0",
+    "nock": "^12.0.3",
+    "os": "^0.1.1",
+    "path": "^0.12.7",
+    "travis": "*"
+  },
+  "dependencies": {
+    "axios": "^0.19.2",
+    "commander": "^5.0.0",
+    "fs": "0.0.1-security",
+    "url": "^0.11.0"
+  },
+  "jest": {
+    "testEnvironment": "node"
+  }
+}
