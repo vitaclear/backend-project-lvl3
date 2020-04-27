@@ -50,11 +50,8 @@ const handle = (data, folder) => {
   const allScripts = $('script[src]');
   const scripts = tagsHandle(allScripts, 'script', folder);
   const srcs = [...links, ...scripts];
-  [...srcs, ...imgs].map((el) => {
-    $(`${el.type}[src="${el.link}"]`).attr('src', el.newLink);
-    return;
-  });
-  return { newData : $.html(), srcs, imgs };
+  [...srcs, ...imgs].map((el) => $(`${el.type}[src="${el.link}"]`).attr('src', el.newLink));
+  return { newData: $.html(), srcs, imgs };
 };
 
 const writeFiles = (file, folder, localFolder, mainUrl, obj) => {

@@ -2,8 +2,8 @@ import nock from 'nock';
 import os from 'os';
 import path from 'path';
 import { promises as fs } from 'fs';
-import pageLoader from '../src';
 import cheerio from 'cheerio';
+import pageLoader from '../src';
 
 const getFixturePath = (name) => path
   .join(__dirname, '..', '__tests__', '__fixtures__', name);
@@ -22,10 +22,9 @@ afterEach(async () => {
       if (el.isFile()) {
         return fs.unlink(filepaths[ind]);
       }
-      return iter(filepaths[ind])
+      return iter(filepaths[ind]);
     }));
     await fs.rmdir(dirname);
-    return;
   };
   await iter(tempDir);
 });
@@ -77,7 +76,7 @@ test('write info from local link', async () => {
     .readFile(getFixturePath('testlinks-new.html'), 'utf-8');
   await pageLoader('http://test.com/testlinks.html', tempDir);
   const writtenLink = await fs
-    .readFile(`${tempDir}/test-com-testlinks-html_files/links-link1.htm`, 'utf-8')
+    .readFile(`${tempDir}/test-com-testlinks-html_files/links-link1.htm`, 'utf-8');
   const writtenBinaryData = await fs
     .readFile(`${tempDir}/test-com-testlinks-html_files/links-1.gif`);
   const writtenData = await fs
@@ -106,6 +105,23 @@ test('don\'t write external link', async () => {
   const rightData = await fs
     .readFile(getFixturePath('externallinks-new.html'), 'utf-8');
   await expect(writtenData).toEqual(cheerio.load(rightData).html());
+  await expect(scope1.isDone()).toBe(true);
+  await expect(scope2.isDone()).toBe(false);
+});
+
+test('right handle of root\'s links', async () => {
+  const webpage = await fs
+    .readFile(getFixturePath('externallinks.html'), 'utf-8');
+  nock('http://test.com')
+    .get('/')
+    .reply(200, webpage);
+  const scope1 = nock('http://test.com')
+    .get('/locallink')
+    .reply(200, 'local link');
+  const scope2 = nock('http://external.net')
+    .get('/links/1.jpg')
+    .reply(200, 'external link');
+  await pageLoader('http://test.com', tempDir);
   await expect(scope1.isDone()).toBe(true);
   await expect(scope2.isDone()).toBe(false);
 });
