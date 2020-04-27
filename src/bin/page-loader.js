@@ -17,3 +17,4 @@ const output = optionInd === -1 ? process.cwd() : args[optionInd + 1];
 const path = optionInd < lastInd - 1 ? args[lastInd] : args[optionInd - 1];
 
 pageLoader(path, output);
+console.log('Downloading is finished!');

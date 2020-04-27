@@ -3,3 +3,5 @@
 [![Build Status](https://travis-ci.org/vitaclear/backend-project-lvl3.svg?branch=master)](https://travis-ci.org/vitaclear/backend-project-lvl3)
 
 [![Asciinema](https://asciinema.org/a/e8VquKBQaArlbpeVBeVKrV9zU)](https://asciinema.org/a/e8VquKBQaArlbpeVBeVKrV9zU)
+
+[Asciinema2](https://asciinema.org/a/f8vT1sAQf8Udna9DIs6Fmr61q)
